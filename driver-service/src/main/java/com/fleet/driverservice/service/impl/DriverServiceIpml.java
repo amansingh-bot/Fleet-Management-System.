@@ -47,6 +47,17 @@ public class DriverServiceIpml implements DriverService {
         return driverMapper.mapToResponse(savedDriver);
     }
 
+    @Override
+    public DriverResponse getDriverById(Long id) {
+
+        Driver driver = driverRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Driver not found with id:" + id));
+
+        return driverMapper.mapToResponse(driver);
+
+    }
+
 //    @Override
 //    public List<DriverResponse> getAllDrivers() {
 //        List<Driver> drivers = driverRepository.findAll();

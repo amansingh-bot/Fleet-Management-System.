@@ -15,6 +15,8 @@ public interface DriverService {
 
 //    List<DriverResponse> getAllDrivers();
 
+    DriverResponse getDriverById(Long id);
+
     DriverResponse getDriverByLicenseNumber(String licenseNumber);
 
     DriverResponse updateDriver(String licenseNumber, DriverRequest request);

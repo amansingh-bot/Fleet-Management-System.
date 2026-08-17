@@ -1,7 +1,9 @@
 package com.fleet.tripservice.mapper;
 
 import com.fleet.tripservice.dto.request.TripRequest;
+import com.fleet.tripservice.dto.response.DriverResponse;
 import com.fleet.tripservice.dto.response.TripResponse;
+import com.fleet.tripservice.dto.response.VehicleResponse;
 import com.fleet.tripservice.entity.Trip;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,7 @@ public class TripMapper {
 
     public TripResponse mapToResponse(Trip trip){
 
+
         return TripResponse.builder()
                 .id(trip.getId())
                 .driverId(trip.getDriverId())
@@ -34,5 +37,18 @@ public class TripMapper {
                 .status(trip.getStatus())
                 .distance(trip.getDistance())
                 .build();
+    }
+
+    public TripResponse mapToResponse(
+            Trip trip,
+            DriverResponse driver,
+            VehicleResponse vehicle) {
+
+        TripResponse response = mapToResponse(trip);
+
+        response.setDriver(driver);
+        response.setVehicle(vehicle);
+
+        return response;
     }
 }

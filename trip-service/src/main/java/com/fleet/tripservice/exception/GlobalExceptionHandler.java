@@ -1,6 +1,7 @@
 package com.fleet.tripservice.exception;
 
 import com.fleet.tripservice.payload.ApiResponse;
+import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -68,5 +69,29 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FeignException.NotFound.class)
+    public ResponseEntity<ApiResponse<Object>> handleFeignNotFound(
+            FeignException.NotFound ex) {
+
+        String url = ex.request().url();
+
+        String message;
+
+        if (url.contains("/api/drivers/")) {
+            message = "Driver not found";
+        } else if (url.contains("/api/vehicles/")) {
+            message = "Vehicle not found";
+        } else {
+            message = "Requested resource not found";
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.builder()
+                        .success(false)
+                        .message(message)
+                        .data(null)
+                        .build());
     }
 }

@@ -50,6 +50,20 @@ public class DriverController {
 //                        .build());
 //    }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ApiResponse<DriverResponse>> getDriverById(
+            @PathVariable Long id){
+
+        DriverResponse response = driverService.getDriverById(id);
+
+        return ResponseEntity.ok(
+                ApiResponse.<DriverResponse>builder()
+                        .success(true)
+                        .message("Driver fetched successfully")
+                        .data(response)
+                        .build());
+    }
+
     @GetMapping("/{licenseNumber}")
     public ResponseEntity<ApiResponse<DriverResponse>> getDriverByLicenseNumber(
             @PathVariable String licenseNumber){

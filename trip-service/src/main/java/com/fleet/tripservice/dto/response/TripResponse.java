@@ -16,7 +16,11 @@ public class TripResponse {
 
     private Long driverId;
 
+    private DriverResponse driver;
+
     private Long vehicleId;
+
+    private VehicleResponse vehicle;
 
     private String startLocation;
 

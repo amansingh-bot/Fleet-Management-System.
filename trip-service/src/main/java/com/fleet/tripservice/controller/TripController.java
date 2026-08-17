@@ -1,6 +1,7 @@
 package com.fleet.tripservice.controller;
 
 
+import com.fleet.tripservice.dto.request.TripFilterRequest;
 import com.fleet.tripservice.dto.request.TripRequest;
 import com.fleet.tripservice.dto.response.TripResponse;
 import com.fleet.tripservice.payload.ApiResponse;
@@ -12,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.SecureRandom;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/trips")
@@ -62,7 +63,50 @@ public class TripController {
         return ResponseEntity.ok(
                 ApiResponse.<TripResponse>builder()
                         .success(true)
-                        .message("Trip Retrieved Successfully")
+                        .message("Trip Retrieved Successfully with id: " + id)
+                        .data(response)
+                        .build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<TripResponse>> updatedTrip(
+            @PathVariable Long id,
+            @Valid @RequestBody TripRequest request){
+
+        TripResponse response = tripService.updatedTrip(id, request);
+
+        return ResponseEntity.ok(
+                ApiResponse.<TripResponse>builder()
+                        .success(true)
+                        .message("Trip update successfully with id: " + id)
+                        .data(response)
+                        .build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Object>> deleteTrip(
+            @PathVariable Long id){
+
+        tripService.deleteTrip(id);
+
+        return ResponseEntity.ok(
+                ApiResponse.<Object>builder()
+                        .success(true)
+                        .message("Trip deleted successfully with id: " + id)
+                        .data(null)
+                        .build());
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<ApiResponse<List<TripResponse>>> filterTrip(
+            @RequestBody TripFilterRequest request){
+
+       List<TripResponse> response = tripService.filterTrip(request);
+
+        return ResponseEntity.ok(
+                ApiResponse.<List<TripResponse>>builder()
+                        .success(true)
+                        .message("Trip fetched successfully")
                         .data(response)
                         .build());
     }

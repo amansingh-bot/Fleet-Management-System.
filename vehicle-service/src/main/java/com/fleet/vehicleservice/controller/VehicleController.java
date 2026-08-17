@@ -52,7 +52,7 @@ public class VehicleController {
 //        );
 //    }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<ApiResponse<VehicleResponse>> getVehicleById(
             @PathVariable Long id) {
 
