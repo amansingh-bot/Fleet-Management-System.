@@ -16,4 +16,16 @@ public interface TripRepository extends JpaRepository<Trip, Long>, JpaSpecificat
     List<Trip> findByVehicleId(Long vehicleId);
 
     List<Trip> findByStatus(TripStatus status);
+
+    boolean existsByDriverIdAndStatusIn(
+            Long driverId, List<TripStatus> statuses);
+
+    boolean existsByVehicleIdAndStatusIn(
+            Long vehicleId, List<TripStatus> statuses);
+
+    boolean existsByDriverIdAndStatusInAndIdNot(
+            Long driverId, List<TripStatus> statuses, Long id);
+
+    boolean existsByVehicleIdAndStatusInAndIdNot(
+            Long vehicleId, List<TripStatus> statuses, Long id);
 }

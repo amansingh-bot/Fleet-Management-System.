@@ -1,5 +1,6 @@
 package com.fleet.tripservice.dto.response;
 
+import com.fleet.tripservice.enums.DriverStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,5 @@ public class DriverResponse {
     private String name;
     private String licenseNumber;
     private String phone;
-    private String status;
+    private DriverStatus status;
 }

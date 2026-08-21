@@ -94,4 +94,16 @@ public class GlobalExceptionHandler {
                         .data(null)
                         .build());
     }
+
+    @ExceptionHandler(TripValidationException.class)
+    public ResponseEntity<ApiResponse<Map<String, String>>> handleTripValidationException(
+            TripValidationException ex) {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ApiResponse.<Map<String, String>>builder()
+                        .success(false)
+                        .message("Trip validation failed")
+                        .data(ex.getErrors())
+                        .build());
+    }
 }

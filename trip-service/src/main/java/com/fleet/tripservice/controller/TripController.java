@@ -3,6 +3,7 @@ package com.fleet.tripservice.controller;
 
 import com.fleet.tripservice.dto.request.TripFilterRequest;
 import com.fleet.tripservice.dto.request.TripRequest;
+import com.fleet.tripservice.dto.response.TripDetailResponse;
 import com.fleet.tripservice.dto.response.TripResponse;
 import com.fleet.tripservice.payload.ApiResponse;
 import com.fleet.tripservice.service.TripService;
@@ -55,16 +56,16 @@ public class TripController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<TripResponse>> getTripById(
+    public ResponseEntity<ApiResponse<TripDetailResponse>> getTripById(
             @PathVariable Long id){
 
-        TripResponse response = tripService.getTripById(id);
+        TripDetailResponse detailResponse = tripService.getTripById(id);
 
         return ResponseEntity.ok(
-                ApiResponse.<TripResponse>builder()
+                ApiResponse.<TripDetailResponse>builder()
                         .success(true)
                         .message("Trip Retrieved Successfully with id: " + id)
-                        .data(response)
+                        .data(detailResponse)
                         .build());
     }
 

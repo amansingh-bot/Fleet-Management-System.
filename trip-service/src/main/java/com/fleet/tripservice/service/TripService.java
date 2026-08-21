@@ -2,6 +2,7 @@ package com.fleet.tripservice.service;
 
 import com.fleet.tripservice.dto.request.TripFilterRequest;
 import com.fleet.tripservice.dto.request.TripRequest;
+import com.fleet.tripservice.dto.response.TripDetailResponse;
 import com.fleet.tripservice.dto.response.TripResponse;
 import org.springframework.data.domain.Page;
 
@@ -17,7 +18,7 @@ public interface TripService {
             String sortBy,
             String sortDir);
 
-    TripResponse getTripById(Long id);
+    TripDetailResponse getTripById(Long id);
 
     TripResponse updatedTrip(Long id, TripRequest request);
 

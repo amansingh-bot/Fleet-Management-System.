@@ -1,0 +1,9 @@
+package com.fleet.tripservice.enums;
+
+public enum VehicleStatus {
+    AVAILABLE,
+    ON_TRIP,
+    MAINTENANCE,
+    INACTIVE
+
+}

@@ -1,4 +1,4 @@
-package com.fleet.driverservice.enums;
+package com.fleet.tripservice.enums;
 
 public enum DriverStatus {
 
